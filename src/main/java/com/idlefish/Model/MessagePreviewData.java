@@ -1,4 +1,4 @@
-package Model;
+package com.idlefish.Model;
 
 public class MessagePreviewData
 {

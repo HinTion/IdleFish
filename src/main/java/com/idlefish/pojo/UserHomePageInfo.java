@@ -2,6 +2,8 @@ package com.idlefish.pojo;
 
 import lombok.*;
 
+import java.util.*;
+
 /**
 * @author : Hinton
 * @时间 : 2024/12/2 下午7:58
@@ -18,16 +20,17 @@ public class UserHomePageInfo {
 
     private String intro;
 
-    private int collectionNum;
+    private List<Long> followToIds;
 
-    private int followNum;
+    private List<Long> fansIds;
 
-    private int fansNum;
+    private List<Long> collectionIds;
 
-    private int myPostNum;
+    private List<Long> browseHistoryIds;
 
-    private int mySoldNum;
+    private List<Long> myPostIds;
 
-    private int myBoughtNum;
+    private List<Long> mySoldIds;
 
+    private List<Long> myPurchasedIds;
 }

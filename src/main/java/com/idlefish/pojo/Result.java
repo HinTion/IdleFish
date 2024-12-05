@@ -1,4 +1,4 @@
-package com.mySchool.entity;
+package com.idlefish.pojo;
 
 import lombok.*;
 
@@ -11,20 +11,21 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 public class Result<T> {
-    private Integer code; // 1 win  0 lose
+    private int code;
     private String message;
     private T data;
 
     // 快速返回成功响应结果
     public static <E> Result<E> success(E data) {
-        return new Result<>(1, "操作成功", data);
+        return new Result<>(200, "操作成功", data);
     }
 
     //
     public static <E> Result<E> success() {
-        return new Result<>(1, "操作成功", null);
+        return new Result<>(200, "操作成功", null);
     }
-    public static Result error(String message){
-        return new Result(0, message, null);
+
+    public static <E> Result<E> error(String message){
+        return new Result<>(0, message, null);
     }
 }

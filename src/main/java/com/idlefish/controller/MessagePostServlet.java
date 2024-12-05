@@ -1,4 +1,4 @@
-package Controller;
+package com.idlefish.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import com.google.gson.Gson;
-import Model.MessageChatData;
-import Repository.DBConnection;
+import com.idlefish.Model.*;
+import com.idlefish.Repository.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import com.idlefish.Model.*;
 
 @WebServlet("/message/messagePost")
 public class MessagePostServlet extends HttpServlet {
@@ -23,7 +24,6 @@ public class MessagePostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         MessageChatData messageChat = gson.fromJson(req.getReader(), MessageChatData.class);
-
         String sql = "INSERT INTO messageChat (senderID, receiverID, messageContent, messageContentPhoto, messageContentVoice, messageTime) VALUES (?, ?, ?, ?, ?, ?)";
 
         if (messageChat.getMessageContent() == null || messageChat.getMessageContent().isEmpty()) {

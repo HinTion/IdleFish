@@ -1,4 +1,4 @@
-package Controller;
+package com.idlefish.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.google.gson.Gson;
-import Model.MessageChatData;
-import Repository.DBConnection;
+import com.idlefish.Model.*;
+import com.idlefish.Repository.*;
 
 @WebServlet("/message/messageGet")
 public class MessageGetServlet extends HttpServlet {

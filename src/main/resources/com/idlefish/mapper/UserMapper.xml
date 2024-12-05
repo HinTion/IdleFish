@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.idlefish.mapper.UserMapper">
+
+    <select id="login" resultType="java.lang.Long">
+        select id from user where account = #{account} and password = #{password}
+    </select>
+
+
+    <insert id="register" keyProperty="id" useGeneratedKeys="true">
+        insert into user (account, password, nickname, avatar, intro, sex)
+        values (#{account}, #{password}, null, null, null, 1)
+    </insert>
+
+
+    <delete id="deleteById">
+        delete from user where id = #{id}
+    </delete>
+
+    <update id="update">
+        update user set
+                        nickname = #{nickname},
+                        avatar = #{avatar},
+                        intro = #{intro},
+                        sex = #{sex},
+                        version = version + 1
+        where id = #{id}
+    </update>
+
+
+    <select id="queryUserById" resultType="com.idlefish.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="queryByName" resultType="com.idlefish.pojo.User">
+        select * from user where account like concat('%', #{name} ,'%')
+    </select>
+    <select id="queryInfo" resultType="com.idlefish.pojo.User">
+        select id, account, nickname, avatar, intro, sex from user where id = #{id}
+    </select>
+
+
+    <select id="queryFollowToInfo" parameterType="java.util.List" resultType="com.idlefish.pojo.UserFollowTo">
+        select id, nickname, avatar, intro from user where user.id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 查到ID列表 -->
+    <select id="queryFollowToIds" resultType="long">
+        select to_uid from user_follow where from_uid = #{id}
+    </select>
+    <select id="queryFansIds" resultType="java.lang.Long">
+        select from_uid from user_follow where to_uid = #{id}
+    </select>
+    <select id="queryCollectionIds" resultType="java.lang.Long">
+        select product_id from user_collection where user_id = #{id}
+    </select>
+    <select id="queryBrowseHistoryIds" resultType="java.lang.Long">
+        select product_id from user_browse where user_id = #{id}
+    </select>
+    <select id="queryMyPostIds" resultType="java.lang.Long">
+        select product_id from user_my_post where user_id = #{id}
+    </select>
+    <select id="queryMySoldIds" resultType="java.lang.Long">
+        select product_id from user_my_sold where user_id = #{id}
+    </select>
+    <select id="queryMyPurchasedIds" resultType="java.lang.Long">
+        select product_id from user_my_purchased where user_id = #{id}
+    </select>
+
+    <!-- 查数量 -->
+    <select id="queryFollowNum" resultType="java.lang.Integer">
+        select count(*) from user_follow where from_uid = #{id}
+    </select>
+    <select id="queryFansNum" resultType="integer">
+        select count(*) from user_follow where to_uid = #{id}
+    </select>
+    <select id="queryCollectionNum" resultType="java.lang.Integer">
+        select count(*) from user_collection where user_id = #{id}
+    </select>
+    <select id="queryMyPostNum" resultType="java.lang.Integer">
+        select count(*) from user_my_post where user_id = #{id}
+    </select>
+    <select id="queryMySoldNum" resultType="java.lang.Integer">
+        select count(*) from user_my_sold where user_id = #{id}
+    </select>
+    <select id="queryMyBoughtNum" resultType="java.lang.Integer">
+        select count(*) from user_my_purchased where user_id = #{id}
+    </select>
+    <select id="queryBrowseNum" resultType="java.lang.Integer">
+        select count(*) from user_browse where user_id = #{id}
+    </select>
+
+</mapper>

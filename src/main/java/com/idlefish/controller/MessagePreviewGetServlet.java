@@ -1,9 +1,7 @@
-package Controller;
+package com.idlefish.controller;
 
-import Model.MessagePreviewData;
-import Repository.DBConnection;
+import com.idlefish.Model.*;
 import com.google.gson.Gson;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +14,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
+import com.idlefish.Repository.*;
 
-@WebServlet("/message/messagePreviewGet")
+// @WebServlet(urlPatterns = "/message/messagePreviewGet")
+@WebServlet(name = "testOneServlet", urlPatterns = "/test_one")// 通过注解@WebServlet指定name和url
 public class MessagePreviewGetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().print("Hello, servlet");
+
         int senderID = Integer.parseInt(req.getParameter("senderID"));
         int receiverID = Integer.parseInt(req.getParameter("receiverID"));
 
